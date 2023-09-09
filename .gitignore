@@ -1,0 +1,15 @@
+*
+!.gitignore
+
+# .config
+!.config
+!.config/starship.toml*
+!.config/nvim
+!.config/nvim/init.vim
+
+# ~
+!.zshrc
+!.bash_aliases
+!.zsh_env
+!.bashrc
+!.vimrc
