@@ -21,18 +21,15 @@ compinit
 # Oh My ZSH from here
 
 plugins=(
-    alias-finder
     autojump
     colored-man-pages
     colorize  # ccat, cless
     command-not-found
-    docker
     extract
     git
     gitfast
     nvm
     npm
-    tmux
     git-auto-fetch
     history
     ubuntu
