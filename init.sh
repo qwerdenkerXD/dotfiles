@@ -16,7 +16,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash 
 . .nvm/nvm.sh
 nvm install node
 nvm install-latest-npm
-sudo apt install -y python3-pycodestyle python3-matplotlib python3-numpy python3-scipy python3-tqdm
+sudo apt install -y python3-pycodestyle python3-matplotlib python3-numpy python3-scipy python3-tqdm python3-pandas
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/plugins/zsh-syntax-highlighting
 
 if [ -f ~/.bash_profile ]; then   # nvm-installer creates it, but .bashrc won't be loaded then
