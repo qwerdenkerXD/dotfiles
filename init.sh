@@ -8,7 +8,7 @@ fi
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-brew install zsh lsd python git r neovim texlive gh glab autojump chroma pycodestyle
+brew install zsh lsd python git r neovim texlive gh glab autojump chroma pycodestyle starship
 
 CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/plugins/zsh-syntax-highlighting
@@ -30,7 +30,8 @@ python3 -m pip install matplotlib numpy scipy tqdm pandas
 
 git init
 git remote add origin https://github.com/qwerdenkerXD/dotfiles
-rm .bashrc .zshrc && git pull origin master
+rm .bashrc .zshrc
+git pull origin master
 sudo rm -r .git
 
 # set zsh as default shell

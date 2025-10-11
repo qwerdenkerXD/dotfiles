@@ -25,8 +25,9 @@ compinit
 
 # Oh My ZSH from here
 
+source /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh
 plugins=(
-    autojump
+    # autojump
     colored-man-pages
     colorize  # ccat, cless
     command-not-found
