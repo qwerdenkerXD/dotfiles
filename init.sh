@@ -6,34 +6,36 @@ if [ -f ./init.sh ]; then   # if this script is run multiple times, it breaks af
 fi
 
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-sudo apt install -y python3-pip texlive-full r-base zsh chroma autojump cargo neovim cmake
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-sudo apt remove -y rust && sudo apt autoremove -y
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew install zsh lsd python git r neovim texlive gh glab autojump chroma pycodestyle
+
+CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/plugins/zsh-syntax-highlighting
+
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-export PATH=$HOME/.cargo/bin:$PATH
-cargo install lsd starship
+
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash  # install nvm
 . .nvm/nvm.sh
 nvm install node
 nvm install-latest-npm
-sudo apt install -y python3-pycodestyle python3-matplotlib python3-numpy python3-scipy python3-tqdm python3-pandas
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/plugins/zsh-syntax-highlighting
 
 if [ -f ~/.bash_profile ]; then   # nvm-installer creates it, but .bashrc won't be loaded then
     rm ~/.bash_profile
 fi
+
+python3 -m venv .pyenv
+. .pyenv/bin/activate
+python3 -m pip install matplotlib numpy scipy tqdm pandas
 
 git init
 git remote add origin https://github.com/qwerdenkerXD/dotfiles
 rm .bashrc .zshrc && git pull origin master
 sudo rm -r .git
 
-# install GitHub CLI
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-&& sudo apt update \
-&& sudo apt install gh -y
+# set zsh as default shell
+command -v zsh | sudo tee -a /etc/shells
+chsh -s $(which zsh)
 
 gh auth login
 

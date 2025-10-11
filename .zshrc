@@ -1,5 +1,10 @@
 DISABLE_AUTO_TITLE="true"
 
+# export PATH=$HOME/swift/usr/bin:"$PATH"
+# export PATH=/home/franz/emsdk:/home/franz/emsdk/upstream/emscripten:"$PATH"
+# EMSDK=/home/franz/emsdk
+# EMSDK_NODE=/home/franz/emsdk/node/20.18.0_64bit/bin/node
+
 # Some color changes
 export LS_COLORS="${LS_COLORS}di=01;94:"
 
@@ -36,7 +41,6 @@ plugins=(
 )
 
 plugins+=(zsh-syntax-highlighting)
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -50,9 +54,17 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-eval "$(starship init zsh)"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 #export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+
+source ~/.pyenv/bin/activate
+# source ~/intel/oneapi/setvars.sh > /dev/null
+# export PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/2025/compilers/bin:"$PATH"
+
+eval "$(starship init zsh)"
